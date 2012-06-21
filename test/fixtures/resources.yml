@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  category_id: 1
+  description: MyText
+  exchange_url: MyString
+  ou_uid: 1
+  week_field: 1
+  start_time: 2012-06-21 14:23:30
+  end_time: 2012-06-21 14:23:30
+  allow_anonymous: false
+
+two:
+  name: MyString
+  category_id: 1
+  description: MyText
+  exchange_url: MyString
+  ou_uid: 1
+  week_field: 1
+  start_time: 2012-06-21 14:23:30
+  end_time: 2012-06-21 14:23:30
+  allow_anonymous: false

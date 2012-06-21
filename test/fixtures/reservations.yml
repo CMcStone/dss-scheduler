@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  resource_id: 1
+  person_id: 1
+  exchange_event_id: MyString
+  cache_start_time: 2012-06-21 14:21:36
+  cache_end_time: 2012-06-21 14:21:36
+  recurrence_id: 1
+  questionnaire_response_id: 1
+  package_id: 1
+
+two:
+  resource_id: 1
+  person_id: 1
+  exchange_event_id: MyString
+  cache_start_time: 2012-06-21 14:21:36
+  cache_end_time: 2012-06-21 14:21:36
+  recurrence_id: 1
+  questionnaire_response_id: 1
+  package_id: 1

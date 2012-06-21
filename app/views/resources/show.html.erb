@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @resource.name %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @resource.category_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @resource.description %>
+</p>
+
+<p>
+  <b>Exchange url:</b>
+  <%= @resource.exchange_url %>
+</p>
+
+<p>
+  <b>Ou uid:</b>
+  <%= @resource.ou_uid %>
+</p>
+
+<p>
+  <b>Week field:</b>
+  <%= @resource.week_field %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @resource.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @resource.end_time %>
+</p>
+
+<p>
+  <b>Allow anonymous:</b>
+  <%= @resource.allow_anonymous %>
+</p>
+
+
+<%= link_to 'Edit', edit_resource_path(@resource) %> |
+<%= link_to 'Back', resources_path %>

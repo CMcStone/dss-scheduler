@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Resource:</b>
+  <%= @reservation.resource_id %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%= @reservation.person_id %>
+</p>
+
+<p>
+  <b>Exchange event:</b>
+  <%= @reservation.exchange_event_id %>
+</p>
+
+<p>
+  <b>Cache start time:</b>
+  <%= @reservation.cache_start_time %>
+</p>
+
+<p>
+  <b>Cache end time:</b>
+  <%= @reservation.cache_end_time %>
+</p>
+
+<p>
+  <b>Recurrence:</b>
+  <%= @reservation.recurrence_id %>
+</p>
+
+<p>
+  <b>Questionnaire response:</b>
+  <%= @reservation.questionnaire_response_id %>
+</p>
+
+<p>
+  <b>Package:</b>
+  <%= @reservation.package_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
+<%= link_to 'Back', reservations_path %>
