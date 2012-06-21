@@ -3,4 +3,6 @@ class QuestionResponse < ActiveRecord::Base
   
   belongs_to :question
   belongs_to :reservation
+  
+  validates :question_id, :reservation_id, :value, :presence => true
 end
