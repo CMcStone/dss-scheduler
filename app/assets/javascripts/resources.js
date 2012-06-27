@@ -12,9 +12,9 @@ $(document).ready(function() {
       center: 'title',
       right: 'month,agendaWeek,agendaDay'
     },
-    defaultView: 'month',
-    height: 400,
-    slotMinutes: 15,    
+    defaultView: 'agendaWeek',
+    height: 500,
+    slotMinutes: 30,    
     selectable: true,
 		selectHelper: true,
     editable: true,
@@ -55,8 +55,7 @@ $(document).ready(function() {
       textColor: 'white',
       error: function() {
                 alert('there was an error while fetching events!');
-            },
-      ignoreTimezone: false
+            }
     }],
         
     timeFormat: 'h:mm t{ - h:mm t} ',
@@ -84,9 +83,9 @@ function updateEvent(the_event) {
       "/reservations/" + the_event.id,
       { reservation: { exchange_event_id: the_event.title,
                  cache_start_time: "" + the_event.start,
-                 cache_end_time: "" + the_event.start,  //TODO -- the_event.end is null for some reason
+                 cache_end_time: "" + the_event.end,
                  person_id: the_event.description,
-                 resource_id: 1
+                 resource_id: the_event.allDay
                }
       }
     );
@@ -96,10 +95,10 @@ function createEvent(the_event) {
     $.post(
       "/reservations",
       { reservation: { exchange_event_id: the_event.title,
-                 cache_start_time: "" + the_event.start,
-                 cache_end_time: "" + the_event.end,
-                 person_id: the_event.description,
-                 resource_id: 1
+                  cache_start_time: "" + the_event.start,
+                  cache_end_time: "" + the_event.end,
+                  person_id: the_event.description,
+                  resource_id: the_event.allDay
                }
       }
     );

@@ -13,6 +13,8 @@
 .fc {
 	direction: ltr;
 	text-align: left;
+  width: 70%;
+  margin: 0px auto;
 	}
 	
 .fc table {

@@ -35,8 +35,8 @@ var defaults = {
 	//disableDragging: false,
 	//disableResizing: false,
 	
-	allDayDefault: true,
-	ignoreTimezone: true,
+	allDayDefault: false,
+	ignoreTimezone: false,
 	
 	// event ajax
 	lazyFetching: true,
@@ -1177,7 +1177,8 @@ function EventManager(options, _sources) {
 		event._start = cloneDate(event.start = parseDate(event.start, ignoreTimezone));
 		event.end = parseDate(event.end, ignoreTimezone);
 		if (event.end && event.end <= event.start) {
-			event.end = null;
+			// event.end = null; 
+      // oBaDa: commented this to avoid null event.end
 		}
 		event._end = event.end ? cloneDate(event.end) : null;
 		if (event.allDay === undefined) {
