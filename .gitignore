@@ -15,3 +15,7 @@
 /tmp
 
 /config/dss-rm.yml
+
+# Other
+.redcar
+.DS_Store
