@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621221346) do
+ActiveRecord::Schema.define(:version => 20120626215455) do
 
   create_table "people", :force => true do |t|
     t.datetime "created_at",  :null => false
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20120621221346) do
     t.integer  "package_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.string   "title"
+    t.text     "description"
   end
 
   create_table "resource_categories", :force => true do |t|
@@ -83,9 +85,11 @@ ActiveRecord::Schema.define(:version => 20120621221346) do
     t.integer  "week_field"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.boolean  "allow_anonymous"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.text     "instructions"
+    t.boolean  "role_required"
+    t.boolean  "allow_public"
   end
 
   create_table "roles", :force => true do |t|
