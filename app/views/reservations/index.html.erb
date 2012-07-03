@@ -1,37 +1,26 @@
-<h1>Listing reservations</h1>
-
-<table>
-  <tr>
-    <th>Resource</th>
-    <th>Person</th>
-    <th>Exchange event</th>
-    <th>Cache start time</th>
-    <th>Cache end time</th>
-    <th>Recurrence</th>
-    <th>Questionnaire response</th>
-    <th>Package</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @reservations.each do |reservation| %>
-  <tr>
-    <td><%= reservation.resource_id %></td>
-    <td><%= reservation.person_id %></td>
-    <td><%= reservation.exchange_event_id %></td>
-    <td><%= reservation.cache_start_time %></td>
-    <td><%= reservation.cache_end_time %></td>
-    <td><%= reservation.recurrence_id %></td>
-    <td><%= reservation.questionnaire_response_id %></td>
-    <td><%= reservation.package_id %></td>
-    <td><%= link_to 'Show', reservation %></td>
-    <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-    <td><%= link_to 'Destroy', reservation, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Reservation', new_reservation_path %>
+<a class="btn" data-toggle="modal" href="#wizard" >Launch Wizard</a>
+<div class="modal hide fade" id="wizard">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<div class="tabbable"> <!-- Only required for left/right tabs -->
+	  <ul class="nav nav-tabs">
+	    <li class="active"><a href="#tab1" data-toggle="tab">Step 1</a></li>
+	    <li><a href="#tab2" data-toggle="tab">Step 2</a></li>
+	    <li><a href="#tab3" data-toggle="tab">Step 3</a></li>
+	    <li><a href="#tab4" data-toggle="tab">Step 4</a></li>
+	  </ul>
+	  <div class="tab-content">
+	    <div class="tab-pane active" id="tab1">
+	      <%= render 'step1' %>
+	    </div>
+	    <div class="tab-pane" id="tab2">
+	      <%= render 'step2' %>
+	    </div>
+	    <div class="tab-pane" id="tab3">
+	      <%= render 'step3' %>
+	    </div>
+	    <div class="tab-pane" id="tab4">
+	      <%= render 'step4'%>
+	    </div>
+	  </div>
+	</div>
+</div>

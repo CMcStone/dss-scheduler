@@ -1,3 +1,18 @@
 // Place all the styles related to the Reservations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1 {
+	margin: 0.5em 0;
+}
+#wizard {
+	width: 50%;
+	padding: 0.5em 1em;	
+}
+.centered {
+	text-align: center;
+}
+img.wizard-image {
+	max-width:100px;
+	max-height:100px;
+}
