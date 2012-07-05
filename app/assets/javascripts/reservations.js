@@ -3,5 +3,8 @@ $(document).ready(function() {
 		keyboard: false,
 		show: true
 	}).fade;
-	console.log('modal')
+	$('#wizard').on('shown', function () {
+	  $('#calendar').fullCalendar('render');
+	})
 })
+
