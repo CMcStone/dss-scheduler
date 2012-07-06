@@ -6,5 +6,7 @@ $(document).ready(function() {
 	$('#wizard').on('shown', function () {
 	  $('#calendar').fullCalendar('render');
 	})
+	$('a[data-method="delete"]').on('ajax:success', function(e, c, s, o) {
+	  $(this).parent().parent().fadeOut();
+	});
 })
-
