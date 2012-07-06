@@ -3,5 +3,10 @@ $(document).ready(function() {
 		keyboard: false,
 		show: true
 	}).fade;
-	console.log('modal')
+	$('#wizard').on('shown', function () {
+	  $('#calendar').fullCalendar('render');
+	})
+	$('a[data-method="delete"]').on('ajax:success', function(e, c, s, o) {
+	  $(this).parent().parent().fadeOut();
+	});
 })
