@@ -39,7 +39,26 @@
   <b>End time:</b>
   <%= @resource.end_time %>
 </p>
-
+<p>
+  <b>Created At:</b>
+  <%= @resource.created_at %>
+</p>
+<p>
+  <b>Updated At:</b>
+  <%= @resource.updated_at %>
+</p>
+<p>
+  <b>Instructions:</b>
+  <%= @resource.instructions %>
+</p>
+<p>
+  <b>Role Required:</b>
+  <%= @resource.role_required %>
+</p>
+<p>
+  <b>Allow Public:</b>
+  <%= @resource.allow_public %>
+</p>
 
 <%= link_to 'Edit', edit_resource_path(@resource) %> |
 <%= link_to 'Back', resources_path %>
