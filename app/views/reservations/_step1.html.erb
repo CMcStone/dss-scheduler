@@ -1,0 +1,31 @@
+<h1>Agenda</h1>
+
+<table class="table table-striped table-condensed">
+  <tr>
+    <th>Resource</th>
+    <th>Date</th>
+    <th></th>
+  </tr>
+
+<% @reservations.each do |reservation| %>
+  <tr>
+    <td><%= reservation.title %></td>
+    <td><%= reservation.cache_start_time.strftime("%m/%d/%Y") %></td>
+    <td><%= link_to 'Cancel', reservation, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+<h1>What would you like to reserve?</h1>
+
+<table class="table">
+  <tr>
+	<td><a href="#"><img src="http://www.projectorpeople.com/SLIS/pimages/XLarge/26593.jpg" alt="Projector" title="Projector" class="wizard-image"></a></td>
+	<td><a href="#"><img src="http://www.texasbandmasters.org/images/logos_icons/icon_computer.png" alt="Laptop" title="Laptop" class="wizard-image"></a></td>
+	<td><a href="#"><img src="http://www.phys-astro.sonoma.edu/people/faculty/severson/images/advising.png" alt="Advising Appointment" title="Advising Appointment" class="wizard-image"></a></td>
+  </tr>	
+  <tr>
+	<td><a href="#"><img src="http://www.clker.com/cliparts/F/A/u/S/c/i/hotel-icon-has-meeting-room-md.png" alt="Room" title="Room" class="wizard-image"></a></td>
+	<td><a href="#"><img src="http://static.emedco.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/Parking-Permits---Hanging-Plastic-PP35207-100-ba.jpg" alt="'A' Permit" title="'A' Permit" class="wizard-image"></a></td>
+	<td><a href="#"><img src="http://www.bebo.com/new-cars/car-images/2011-toyota-prius--3.jpg" alt="Fleet Vehicle" title="Fleet Vehicle" class="wizard-image"></a></td>
+  </tr>	
+</table>
