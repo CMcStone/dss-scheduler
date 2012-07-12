@@ -4,6 +4,9 @@ class ReservationsController < ApplicationController
   # GET /reservations.json
   def index
     @reservations = Reservation.all
+    session[:reservation_params] ||= {}
+    @reservation = Reservation.new(session[:reservation_params])
+    @reservation.current_step = session[:reservation_step]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,12 +28,9 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   # GET /reservations/new.json
   def new
-    @reservation = Reservation.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @reservation }
-    end
+    session[:reservation_params] ||= {}
+    @reservation = Reservation.new(session[:reservation_params])
+    @reservation.current_step = session[:reservation_step]
   end
 
   # GET /reservations/1/edit
@@ -41,17 +41,26 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(params[:reservation])
-
-    respond_to do |format|
-      if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
-        format.json { render json: @reservation, status: :created, location: @reservation }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+    session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
+      @reservation = Reservation.new(session[:reservation_params])
+      @reservation.current_step = session[:reservation_step]
+      if @reservation.valid?
+        if params[:back_button]
+          @reservation.previous_step
+        elsif @reservation.last_step?
+          @reservation.save if @reservation.all_valid?
+        else
+          @reservation.next_step
+        end
+        session[:reservation_step] = @reservation.current_step
       end
-    end
+      if @reservation.new_record?
+        render "new"
+      else
+        session[:reservation_step] = session[:reservation_params] = nil
+        flash[:notice] = "Reservation created!"
+        redirect_to @reservations
+      end
   end
 
   # PUT /reservations/1

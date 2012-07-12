@@ -2,25 +2,20 @@
 <div class="modal hide fade" id="wizard">
 	<button type="button" class="close" data-dismiss="modal">×</button>
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
-	  <ul class="nav nav-tabs">
-	    <li class="active"><a href="#tab1" data-toggle="tab">Step 1</a></li>
-	    <li><a href="#tab2" data-toggle="tab">Step 2</a></li>
-	    <li><a href="#tab3" data-toggle="tab">Step 3</a></li>
-	    <li><a href="#tab4" data-toggle="tab">Step 4</a></li>
-	  </ul>
 	  <div class="tab-content">
-	    <div class="tab-pane active" id="tab1">
-	      <%= render 'step1' %>
-	    </div>
-	    <div class="tab-pane" id="tab2">
-	      <%= render 'step2' %>
-	    </div>
-	    <div class="tab-pane" id="tab3">
-	      <%= render 'step3' %>
-	    </div>
-	    <div class="tab-pane" id="tab4">
-	      <%= render 'step4'%>
-	    </div>
+	    	<div class="tab-pane active" id="tab1">
+		      <%= render 'form' %>
+		    </div>
+		    <div class="tab-pane" id="tab2">
+		      <%= render 'step2' %>
+		    </div>
+		    <div class="tab-pane" id="tab3">
+		      <%= render 'step3' %>
+		    </div>
+		    <div class="tab-pane" id="tab4">
+		      <%= render 'step4'%>
+		    </div>
 	  </div>
 	</div>
 </div>
+
