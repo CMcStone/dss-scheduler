@@ -110,7 +110,6 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   declarative_authorization
-  execjs
   jquery-rails
   rails (= 3.2.5)
   rubycas-client
