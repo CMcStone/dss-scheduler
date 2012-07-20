@@ -9,4 +9,7 @@ $(document).ready(function() {
 	$('a[data-method="delete"]').on('ajax:success', function(e, c, s, o) {
 	  $(this).parent().parent().fadeOut();
 	});
+	$('div.wizard-btn-group button').click( function(e) {
+		console.log('ahoy!');
+	});
 })

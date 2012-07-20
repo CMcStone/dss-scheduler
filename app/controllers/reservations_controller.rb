@@ -3,8 +3,9 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @person = Person.find_by_uid(0) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
+    @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
     @reservations = @person.reservations
+    @reservation = Reservation.new(params[:reservation])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,6 +38,8 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
+    @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
+    @reservations = @person.reservations
     @reservation = Reservation.new(params[:reservation])
 
     respond_to do |format|
