@@ -16,24 +16,13 @@
 <% end %>
 </table>
 <h1>What would you like to reserve?</h1>
-
+<%= form_for(@reservation, :remote=>true, :url => reservations_wizard_path) do |f| %>
 	<div class="btn-group wizard-btn-group">
-		<button class="btn wizard-resource" value="1">
-			<%= image_tag( 'http://goo.gl/dFuVQ', :class => "wizard-image") %>
-		</button>
-		<button class="btn wizard-resource" value="2">
-			<%= image_tag( 'http://goo.gl/zeq1X', :class => "wizard-image") %>
-		</button>
-		<button class="btn wizard-resource" value="3">
-			<%= image_tag( 'http://goo.gl/wj59n', :class => "wizard-image") %>
-		</button>
-		<button class="btn wizard-resource" value="4">
-			<%= image_tag( 'http://goo.gl/e319z', :class => "wizard-image") %>
-		</button>
-		<button class="btn wizard-resource" value="5">
-			<%= image_tag( 'http://goo.gl/RwzKa', :class => "wizard-image") %>
-		</button>
-		<button class="btn wizard-resource" value="6">
-			<%= image_tag( 'http://goo.gl/3VsWX', :class => "wizard-image") %>
-		</button>
+		<%= f.submit "Projector", :name => "next_button", :class => "btn wizard-resource resource-projector" %>
+		<%= f.submit "Laptop", :name => "next_button", :class => "btn wizard-resource resource-laptop" %>
+		<%= f.submit "Advising", :name => "next_button", :class => "btn wizard-resource resource-advising" %>
+		<%= f.submit "Room", :name => "next_button", :class => "btn wizard-resource resource-room" %>
+		<%= f.submit "'A' Permit", :name => "next_button", :class => "btn wizard-resource resource-permit" %>
+		<%= f.submit "Vehicle", :name => "next_button", :class => "btn wizard-resource resource-vehicle" %>
 	</div>
+<% end %>

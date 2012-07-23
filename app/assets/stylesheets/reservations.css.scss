@@ -13,9 +13,27 @@ h1 {
 table.wizard tr:nth-child(n+5) {
 	display:none;
 }
-button.wizard-resource {
+button.wizard-resource, input.wizard-resource {
 	width: 120px;
 	height: 120px;
+}
+input.resource-projector {
+	background:url(projector.png) center center no-repeat;
+}
+input.resource-laptop {
+	background:url(laptop.png) center center no-repeat;
+}
+input.resource-advising {
+	background:url(advising.png) center center no-repeat;
+}
+input.resource-room {
+	background:url(room.png) center center no-repeat;
+}
+input.resource-permit {
+	background:url(permit.png) center center no-repeat;
+}
+input.resource-vehicle {
+	background:url(vehicle.png) center center no-repeat;
 }
 .wizard-btn-group {
 	margin-left: 150px;
