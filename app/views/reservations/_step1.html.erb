@@ -1,6 +1,6 @@
 <h1>Agenda</h1>
 
-<table class="table table-striped table-condensed">
+<table class="table table-striped table-condensed wizard">
   <tr>
     <th>Resource</th>
     <th>Date</th>
@@ -16,16 +16,13 @@
 <% end %>
 </table>
 <h1>What would you like to reserve?</h1>
-
-<table class="table">
-  <tr>
-	<td><a href="#tab2" data-toggle="tab"><img src="http://www.projectorpeople.com/SLIS/pimages/XLarge/26593.jpg" alt="Projector" title="Projector" class="wizard-image"></a></td>
-	<td><a href="#tab2" data-toggle="tab"><img src="http://www.texasbandmasters.org/images/logos_icons/icon_computer.png" alt="Laptop" title="Laptop" class="wizard-image"></a></td>
-	<td><a href="#tab2" data-toggle="tab"><img src="http://www.phys-astro.sonoma.edu/people/faculty/severson/images/advising.png" alt="Advising Appointment" title="Advising Appointment" class="wizard-image"></a></td>
-  </tr>	
-  <tr>
-	<td><a href="#tab2" data-toggle="tab"><img src="http://www.clker.com/cliparts/F/A/u/S/c/i/hotel-icon-has-meeting-room-md.png" alt="Room" title="Room" class="wizard-image"></a></td>
-	<td><a href="#tab2" data-toggle="tab"><img src="http://static.emedco.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/Parking-Permits---Hanging-Plastic-PP35207-100-ba.jpg" alt="'A' Permit" title="'A' Permit" class="wizard-image"></a></td>
-	<td><a href="#tab2" data-toggle="tab"><img src="http://www.bebo.com/new-cars/car-images/2011-toyota-prius--3.jpg" alt="Fleet Vehicle" title="Fleet Vehicle" class="wizard-image"></a></td>
-  </tr>	
-</table>
+<%= form_for(@reservation, :remote=>true, :url => reservations_wizard_path) do |f| %>
+	<div class="btn-group wizard-btn-group">
+		<%= f.submit "Projector", :name => "next_button", :class => "btn wizard-resource resource-projector" %>
+		<%= f.submit "Laptop", :name => "next_button", :class => "btn wizard-resource resource-laptop" %>
+		<%= f.submit "Advising", :name => "next_button", :class => "btn wizard-resource resource-advising" %>
+		<%= f.submit "Room", :name => "next_button", :class => "btn wizard-resource resource-room" %>
+		<%= f.submit "'A' Permit", :name => "next_button", :class => "btn wizard-resource resource-permit" %>
+		<%= f.submit "Vehicle", :name => "next_button", :class => "btn wizard-resource resource-vehicle" %>
+	</div>
+<% end %>

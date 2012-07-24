@@ -23,7 +23,7 @@ end
 gem 'jquery-rails'
 
 gem 'viewpoint'
-gem 'rubyntlm'
+gem 'rubyntlm', :git => 'git://github.com/wimm/rubyntlm.git'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
