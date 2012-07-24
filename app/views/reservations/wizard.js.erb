@@ -1,4 +1,4 @@
 <% step = @reservation.current_step %>
 $('div#debug-area').html("<%= escape_javascript(debug session[:reservation_step]) %>");
 $('div#wizard-form').html("<%= escape_javascript(render :partial => step) %>");
-$('#calendar').fullCalendar('render');
+//$('#calendar').fullCalendar('render');

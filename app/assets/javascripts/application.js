@@ -12,4 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap
+//= require fullcalendar
+//= require jquery-ui-1.8.11.custom.min
+//= require jquery.rest
+//= require reservations
+//= require resources
+
