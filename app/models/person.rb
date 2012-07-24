@@ -1,4 +1,5 @@
 class Person < ActiveRecord::Base
+  attr_accessible :uid, :guest_token, :guest_email
   validate :must_have_uid_or_guest
   before_validation :generate_guest_token_if_needed
   

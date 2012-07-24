@@ -5,7 +5,7 @@
 	Instructions go here. Instructions go here. Instructions go here. Instructions go here.
 </p>
 
-<form class="form-horizontal">
+<%= form_for(@reservation, :remote=>true, :url => reservations_wizard_path) do |f| %>
   <fieldset>
 	<div class="control-group">
       <label class="control-label" for="input01">Custom Question:</label>
@@ -26,4 +26,6 @@
       </div>
     </div>
   </fieldset>
-</form>
+  <p><%= f.submit "Continue", :name => "next_button" unless @reservation.first_step? %></p>
+  <p><%= f.submit "Back", :name => "back_button" unless @reservation.first_step? %></p>
+<% end %>

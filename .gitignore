@@ -19,3 +19,4 @@
 # Other
 .redcar
 .DS_Store
+Gemfile.lock

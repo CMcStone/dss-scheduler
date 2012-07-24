@@ -3,7 +3,11 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
+    @reservations = @person.reservations
+    session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
+    @reservation = Reservation.new(session[:reservation_params])
+    @reservation.current_step = session[:reservation_step]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,12 +29,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   # GET /reservations/new.json
   def new
-    @reservation = Reservation.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @reservation }
-    end
+    @reservation = Reservation.new#(session[:reservation_params])
   end
 
   # GET /reservations/1/edit
@@ -41,6 +40,8 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
+    @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
+    @reservations = @person.reservations
     @reservation = Reservation.new(params[:reservation])
 
     respond_to do |format|
@@ -79,6 +80,34 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to reservations_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def wizard
+    #debugger
+    session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
+    @reservation = Reservation.new(session[:reservation_params])
+    @reservation.current_step = session[:reservation_step]
+    @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
+    @reservations = @person.reservations
+    if @reservation.valid?
+        if params[:back_button]
+          @reservation.previous_step
+        elsif params[:next_button]
+          @reservation.next_step
+        elsif @reservation.last_step?
+          @reservation.save if @reservation.all_valid?
+        end
+        session[:reservation_step] = @reservation.current_step
+    end
+    if @reservation.new_record?
+      respond_to do |format|
+        format.js
+      end
+    else
+      session[:reservation_step] = session[:reservation_params] = nil
+      flash[:notice] = "Reservation created!"
+      redirect_to @reservation
     end
   end
 end
