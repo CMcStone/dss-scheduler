@@ -11,17 +11,19 @@
     </div>
   <% end %>
 
+  <h3>Resource Fields</h3>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  
   <div class="field">
     <%= f.label :category_id %><br />
-    <%= f.number_field :category_id %>
+	<%=collection_select(:ResourceCategory, :name, @resourceCategories, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.text_field :description %>
   </div>
   <div class="field">
     <%= f.label :exchange_url %><br />
@@ -42,6 +44,14 @@
   <div class="field">
     <%= f.label :end_time %><br />
     <%= f.datetime_select :end_time %>
+  </div>
+    <div class="field">
+    <%= f.label :instructions %><br />
+    <%= f.text_field :instructions %>
+  </div>
+  <div class="field">
+    <%= f.label :role_required %><br />
+    <%= f.check_box :role_required %>
   </div>
   <div class="field">
     <%= f.label :allow_public %><br />
