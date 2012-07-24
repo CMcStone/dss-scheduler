@@ -1,0 +1,22 @@
+<div id="debug-area">
+	<%= debug @reservation.current_step %>
+	<%= debug session[:reservation_step] %>
+</div>
+
+<%= form_for(@reservation, :remote=>true, :url => reservations_wizard_path) do |f| %>
+  <% if @reservation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+      <% @reservation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div id="wizard-form">
+	  <%= render "#{@reservation.current_step}", :f => f %>
+	</div>
+
+<% end %>
