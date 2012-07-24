@@ -1,0 +1,14 @@
+<h1>Listing resources</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Is Pool</th>
+
+  </tr>
+<% @resourceCategories.each do |resourceCategory| %>
+  <tr>
+    <td><%= resourceCategory.name %></td>
+    <td><%= resourceCategory.is_pool %></td>
+  </tr>
+<% end %>
+</table>

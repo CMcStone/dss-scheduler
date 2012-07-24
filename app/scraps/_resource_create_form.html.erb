@@ -1,0 +1,69 @@
+<%= form_for(@resource) do |f| %>
+  <% if @resource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+      <% @reservation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :instructions %><br />
+    <%= f.text_field :instructions %>
+  </div>
+  <div class="field">
+    <%= f.label :allow_public %><br />
+    <%= f.check_box :allow_public %>
+  </div>
+  <div class="field">
+    <%= f.label :role_required %><br />
+    <%= f.check_box :role_required %>
+  </div>
+  <div class="field">
+    <%= f.label :start_time %><br />
+    <%= f.datetime_select :start_time %>
+  </div>  
+  <div class="field">
+    <%= f.label :end_time %><br />
+    <%= f.datetime_select :end_time %>
+  </div>
+  <div class="field">
+    <%= f.label :week_field %><br />
+    <%= f.number_field :week_field %>
+  </div>
+  <div class="field">
+    <%= f.label :exchange_url %><br />
+    <%= f.text_field :exchange_url %>
+  </div>
+  <div class="field">
+    <%= f.label :ou_uid %><br />
+    <%= f.number_field :ou_uid %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br />
+    <%= f.number_field :category_id %>
+  </div>
+  <%= f.fields_for :questions do |builder| %>
+  <fieldset>
+  <%= builder.label :content, "Question" %><br />
+  <%= builder.text_area :content %>
+  
+  </fieldset>
+  <% end %>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div> 
+  <% end %>

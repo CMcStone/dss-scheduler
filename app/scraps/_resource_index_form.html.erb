@@ -1,0 +1,15 @@
+<table class="table table-striped table-condensed">
+  <tr>
+    <th>Reservations</th>
+    <th>Date</th>
+  </tr>
+
+  <% @resources.each do |resource| %>
+  <tr id="<%= 'resource_' + resource.id.to_s %>">
+    <td><%= resource.name %></td>
+    <td><%= resource.description %></td>
+    <td><%= link_to 'Cancel', resource, method: :delete, remote: true %></td>
+  </tr>
+<% end %>
+</table>
+ 
