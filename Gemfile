@@ -22,7 +22,6 @@ end
 
 gem 'jquery-rails'
 
-gem 'rubyntlm', :git => 'https://github.com/wimm/rubyntlm.git'
 gem 'viewpoint'
 gem 'rubyntlm', :git => 'git://github.com/wimm/rubyntlm.git'
 
