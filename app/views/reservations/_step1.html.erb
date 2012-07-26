@@ -18,11 +18,8 @@
 <h1>What would you like to reserve?</h1>
 <%= form_for(@reservation, :remote=>true, :url => reservations_wizard_path) do |f| %>
 	<div class="btn-group wizard-btn-group">
-		<%= f.submit "Projector", :name => "next_button", :class => "btn wizard-resource resource-projector" %>
-		<%= f.submit "Laptop", :name => "next_button", :class => "btn wizard-resource resource-laptop" %>
-		<%= f.submit "Advising", :name => "next_button", :class => "btn wizard-resource resource-advising" %>
-		<%= f.submit "Room", :name => "next_button", :class => "btn wizard-resource resource-room" %>
-		<%= f.submit "'A' Permit", :name => "next_button", :class => "btn wizard-resource resource-permit" %>
-		<%= f.submit "Vehicle", :name => "next_button", :class => "btn wizard-resource resource-vehicle" %>
+		<% @resource_categories.each do |rc| %>
+			<%= f.submit rc.name, :name => "next_button", :class => "btn wizard-resource resource-" + rc.name %>
+		<% end %>
 	</div>
 <% end %>

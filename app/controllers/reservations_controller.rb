@@ -8,7 +8,8 @@ class ReservationsController < ApplicationController
     session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
     @reservation = Reservation.new(session[:reservation_params])
     @reservation.current_step = session[:reservation_step]
-
+    @resource_categories = ResourceCategory.all
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @reservations }
@@ -90,6 +91,7 @@ class ReservationsController < ApplicationController
     @reservation.current_step = session[:reservation_step]
     @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
     @reservations = @person.reservations
+    @resource_categories = ResourceCategory.all
     if @reservation.valid?
         if params[:back_button]
           @reservation.previous_step
