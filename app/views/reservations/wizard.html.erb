@@ -1,8 +1,3 @@
-<div id="debug-area">
-	<%= debug @reservation.current_step %>
-	<%= debug session[:reservation_step] %>
-</div>
-
 <%= form_for(@reservation, :remote=>true, :url => reservations_wizard_path) do |f| %>
   <% if @reservation.errors.any? %>
     <div id="error_explanation">
@@ -20,3 +15,6 @@
 	</div>
 
 <% end %>
+<div id="debug-area">
+	<%= debug session[:reservation_step] %>
+</div>
