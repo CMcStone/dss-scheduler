@@ -8,7 +8,6 @@ class ReservationsController < ApplicationController
     session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
     @reservation = Reservation.new(session[:reservation_params])
     @reservation.current_step = session[:reservation_step]
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @reservations }

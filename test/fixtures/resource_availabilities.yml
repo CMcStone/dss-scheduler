@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_time: 2012-07-26 10:11:05
+  length: 1
+  resource_id: 1
+  skip_duration: 1
+
+two:
+  start_time: 2012-07-26 10:11:05
+  length: 1
+  resource_id: 1
+  skip_duration: 1
