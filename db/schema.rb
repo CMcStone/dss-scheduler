@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628174608) do
+ActiveRecord::Schema.define(:version => 20120726171105) do
 
   create_table "people", :force => true do |t|
     t.datetime "created_at",  :null => false
@@ -61,20 +61,20 @@ ActiveRecord::Schema.define(:version => 20120628174608) do
     t.text     "description"
   end
 
+  create_table "resource_availabilities", :force => true do |t|
+    t.datetime "start_time"
+    t.integer  "length"
+    t.integer  "resource_id"
+    t.integer  "skip_duration"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "resource_categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.boolean  "is_pool"
-  end
-
-  create_table "resource_periods", :force => true do |t|
-    t.integer  "resource_id"
-    t.integer  "length"
-    t.datetime "start_time"
-    t.integer  "skip_duration"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
   end
 
   create_table "resources", :force => true do |t|
@@ -83,9 +83,6 @@ ActiveRecord::Schema.define(:version => 20120628174608) do
     t.text     "description"
     t.string   "exchange_url"
     t.integer  "ou_uid"
-    t.integer  "week_field"
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.text     "instructions"
