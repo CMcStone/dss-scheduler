@@ -9,7 +9,7 @@
     <div class="control-group">
       <label class="control-label" for="input01">Department</label>
       <div class="controls">
-        <%=	collection_select("resource", "ou_uid", @departments, :ou_uid, :description, { :prompt => 'Select Department', :selected => Resource.where('id == ' + session[:reservation_params]['resource_id']).pluck(:ou_uid).first } )	%>
+        <%=	collection_select("resource", "ou_uid", @departments, :ou_uid, :description, { :prompt => 'Select Department', :selected => session[:resource_params]['ou_uid'].to_i } )	%>
       </div>
     </div>
     <div class="control-group">
@@ -17,7 +17,7 @@
       <div class="controls">
 		<select id="resource_id" name="reservation[resource_id]">
 			<option value class="static">Select Resource</option>
-	        <% @resources.each do |r|	%>
+	        <% Resource.where('category_id = ' + session[:resource_params]['category_id']).each do |r|	%>
 				<option value="<%= r.id %>"
 					class="dep_<%= r.ou_uid %>"
 					<% if session[:reservation_params]['resource_id'].to_i == r.id %>
