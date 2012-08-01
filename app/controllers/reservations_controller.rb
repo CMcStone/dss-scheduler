@@ -100,15 +100,16 @@ class ReservationsController < ApplicationController
     @resources = Resource.all
     @departments = Resource.select("DISTINCT(ou_uid), description")
 
-    if @reservation.valid?
-        if params[:back_button]
-          @reservation.previous_step
-        elsif @reservation.last_step?
-          @reservation.save if @reservation.all_valid?
-        else
-          @reservation.next_step
-        end
-        session[:reservation_step] = @reservation.current_step
+    if params[:back_button]
+      @reservation.previous_step
+      session[:reservation_step] = @reservation.current_step
+    elsif @reservation.valid?
+      if @reservation.last_step?
+        @reservation.save if @reservation.all_valid?
+      else
+        @reservation.next_step
+      end
+      session[:reservation_step] = @reservation.current_step
     end
     if @reservation.new_record?
       respond_to do |format|
