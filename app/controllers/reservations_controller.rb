@@ -8,6 +8,10 @@ class ReservationsController < ApplicationController
     session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
     @reservation = Reservation.new(session[:reservation_params])
     @reservation.current_step = session[:reservation_step]
+    @resource_categories = ResourceCategory.all
+    @resources = Resource.all
+    @departments = Resource.select("DISTINCT(ou_uid), description")
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @reservations }
@@ -84,18 +88,25 @@ class ReservationsController < ApplicationController
   
   def wizard
     #debugger
+    session[:reservation_params] ||= {}
+    session[:resource_params] ||= {}
     session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
+    session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
     @reservation = Reservation.new(session[:reservation_params])
     @reservation.current_step = session[:reservation_step]
     @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
     @reservations = @person.reservations
+    @resource_categories = ResourceCategory.all
+    @resources = Resource.all
+    @departments = Resource.select("DISTINCT(ou_uid), description")
+
     if @reservation.valid?
         if params[:back_button]
           @reservation.previous_step
-        elsif params[:next_button]
-          @reservation.next_step
         elsif @reservation.last_step?
           @reservation.save if @reservation.all_valid?
+        else
+          @reservation.next_step
         end
         session[:reservation_step] = @reservation.current_step
     end

@@ -3,7 +3,7 @@ class Reservation < ActiveRecord::Base
   attr_writer :current_step
   
   # validates :person_id, :resource_id, :cache_start_time, :cache_end_time, :presence => true
-  # validates :resource_id, :presence => true, :if => lambda { |o| o.current_step == "step2" }
+  validates :resource_id, :presence => true, :if => lambda { |o| o.current_step == "step2" }
   
   belongs_to :resource
   belongs_to :person

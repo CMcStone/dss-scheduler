@@ -9,13 +9,25 @@
     <div class="control-group">
       <label class="control-label" for="input01">Department</label>
       <div class="controls">
-        <%=	collection_select("name", "resource_id", @reservations, :id, :title )	%> <!-- TODO: change to correct Department list -->
+        <%=	collection_select("resource", "ou_uid", @departments, :ou_uid, :description, { :prompt => 'Select Department', :selected => session[:resource_params]['ou_uid'].to_i } )	%>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="input01">Resource</label>
       <div class="controls">
-        <%=	collection_select("name", "resource_id", @reservations, :id, :title )	%> <!-- TODO: change to correct Resources list -->
+		<select id="resource_id" name="reservation[resource_id]">
+			<option value class="static">Select Resource</option>
+	        <% Resource.where('category_id = ' + session[:resource_params]['category_id']).each do |r|	%>
+				<option value="<%= r.id %>"
+					class="dep_<%= r.ou_uid %>"
+					<% if session[:reservation_params]['resource_id'].to_i == r.id %>
+						selected
+					<% end %>
+					>
+					<%= r.name %>
+				</option>
+			<% end %>
+		</select>
       </div>
     </div>
   </fieldset>
