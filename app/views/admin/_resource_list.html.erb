@@ -1,0 +1,19 @@
+<h2> Resource Listing</h2>
+<div class="row-fluid">
+  <div class="span2">Name</div>
+  <div class="span2">Ou</div>
+  <div class="span2">Category</div>
+  <div class="span2">Pool</div>
+  <div class="span2">Role_Required</div>
+  <div class="span2">Allow_Public</div>
+</div>
+<% @resources.each do |resource| %>
+<div class="row-fluid">
+  <div class="span1" id="<%= 'resource_' + resource.id.to_s + '_name' %>">   <%= resource.name %>    </div>
+  <div class="span1" id="<%= 'resource_' + resource.id.to_s + '_ou' %>">   <%= resource.name %>    </div>
+  <div class="span1" id="<%= 'resource_' + resource.id.to_s + '_category' %>">   <%= resource.resource_category.name %>    </div>
+  <div class="span1" id="<%= 'resource_' + resource.id.to_s + '_id' %>">   <%= resource.id %>    </div>
+  <div class="span1">.|.</div>
+  <div class="span1">.|.</div>
+</div>
+  <% end %>

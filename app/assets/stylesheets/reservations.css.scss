@@ -7,6 +7,7 @@ h1 {
 }
 #wizard {
 	width: 760px;
+	height: 500px;
 	left: 40%;
 	padding: 0.5em 1em;
 }
@@ -16,24 +17,25 @@ table.wizard tr:nth-child(n+5) {
 button.wizard-resource, input.wizard-resource {
 	width: 120px;
 	height: 120px;
+	text-indent: -9999px;
 }
 input.resource-projector {
-	background:url(projector.png) center center no-repeat;
+	background:url(projector.png) center center no-repeat !important;
 }
 input.resource-laptop {
-	background:url(laptop.png) center center no-repeat;
+	background:url(laptop.png) center center no-repeat !important;
 }
 input.resource-advising {
-	background:url(advising.png) center center no-repeat;
+	background:url(advising.png) center center no-repeat !important;
 }
 input.resource-room {
-	background:url(room.png) center center no-repeat;
+	background:url(room.png) center center no-repeat !important;
 }
 input.resource-permit {
-	background:url(permit.png) center center no-repeat;
+	background:url(permit.png) center center no-repeat !important;
 }
 input.resource-vehicle {
-	background:url(vehicle.png) center center no-repeat;
+	background:url(vehicle.png) center center no-repeat !important;
 }
 .wizard-btn-group {
 	margin-left: 150px;

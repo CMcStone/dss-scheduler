@@ -22,6 +22,7 @@
             <% unless session[:cas_user].nil? %>
             <%= li_link_with_class({:title => 'New Request', :controller => 'reservations', :action => 'new'}) %>
             <%= li_link_with_class({:title => 'Existing Requests', :controller => 'reservations', :action => 'index'}) %>
+			<%= li_link_with_class({:title => 'Admin', :controller => 'admin', :action => 'index'}) %>
             <% end %>
           </ul>
           

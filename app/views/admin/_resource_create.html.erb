@@ -17,9 +17,10 @@
     <%= f.text_field :name %>
   </div>
   
+  <%=collection_select(:ResourceCategory, :name, @resourceCategories, :id, :name) %>
   <div class="field">
     <%= f.label :category_id %><br />
-	<%=collection_select(:ResourceCategory, :name, @resourceCategories, :id, :name) %>
+    <%= f.number_field :category_id %>
   </div>
   <div class="field">
     <%= f.label :description %><br />

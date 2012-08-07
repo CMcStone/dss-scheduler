@@ -1,0 +1,14 @@
+<%= form_for(@resourceCategory) do |f| %>
+  <h3>resourceCategory Fields</h3>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :is_pool %><br />
+    <%= f.check_box :is_pool %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<h1>Admin area </h1>
+<%= link_to "link to new resource", {:controller => "resources", :action => "new"} %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span10">
+		<%= render 'resource_list' %>
+	</div>
+    <div class="span2">
+	<%= render 'resource_show' %>
+    </div>
+  </div>
+</div>
