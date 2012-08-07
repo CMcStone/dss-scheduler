@@ -6,6 +6,7 @@ class Resource < ActiveRecord::Base
   has_one :resource_period
   has_many :questions
   
-  validates :name, :description, :exchange_calendar_id, :week_field, :start_time, :end_time, :allow_public, :presence => true
+  validates :name, :description, :exchange_calendar_id, :week_field, :start_time, :end_time, :presence => true
+  validates_inclusion_of :allow_public, :in => [true, false]
   
 end
