@@ -2,7 +2,6 @@
   <% if @resource.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@resource.errors.count, "error") %> prohibited this resource from being saved:</h2>
-
       <ul>
       <% @resource.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -10,7 +9,6 @@
       </ul>
     </div>
   <% end %>
-
   <h3>Resource Fields</h3>
   <div class="field">
     <%= f.label :name %><br />
@@ -21,29 +19,18 @@
     <%= f.label :category_id %><br />
 	<%=collection_select(:ResourceCategory, :name, @resourceCategories, :id, :name) %>
   </div>
+
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :exchange_url %><br />
-    <%= f.text_field :exchange_url %>
+    <%= f.label :exchange_calendar_id %><br />
+    <%= f.text_field :exchange_calendar_id %>
   </div>
   <div class="field">
     <%= f.label :ou_uid %><br />
     <%= f.number_field :ou_uid %>
-  </div>
-  <div class="field">
-    <%= f.label :week_field %><br />
-    <%= f.number_field :week_field %>
-  </div>
-  <div class="field">
-    <%= f.label :start_time %><br />
-    <%= f.datetime_select :start_time %>
-  </div>
-  <div class="field">
-    <%= f.label :end_time %><br />
-    <%= f.datetime_select :end_time %>
   </div>
     <div class="field">
     <%= f.label :instructions %><br />

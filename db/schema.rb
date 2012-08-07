@@ -81,13 +81,13 @@ ActiveRecord::Schema.define(:version => 20120807205403) do
     t.string   "name"
     t.integer  "resource_category_id"
     t.text     "description"
-    t.string   "exchange_url"
     t.integer  "ou_uid"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.text     "instructions"
     t.boolean  "role_required"
     t.boolean  "allow_public"
+    t.integer  "exchange_calendar_id"
   end
 
   create_table "roles", :force => true do |t|
