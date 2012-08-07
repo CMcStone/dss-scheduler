@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120802210152) do
+ActiveRecord::Schema.define(:version => 20120807210827) do
 
   create_table "people", :force => true do |t|
     t.datetime "created_at",  :null => false
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(:version => 20120802210152) do
     t.datetime "updated_at",                :null => false
     t.string   "title"
     t.text     "description"
-    t.string   "exchange_change_key"
   end
 
   create_table "resource_availabilities", :force => true do |t|
@@ -82,13 +81,13 @@ ActiveRecord::Schema.define(:version => 20120802210152) do
     t.string   "name"
     t.integer  "category_id"
     t.text     "description"
-    t.string   "exchange_calendar_id"
     t.integer  "ou_uid"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.text     "instructions"
     t.boolean  "role_required"
     t.boolean  "allow_public"
+    t.integer  "exchange_calendar_id"
   end
 
   create_table "roles", :force => true do |t|
