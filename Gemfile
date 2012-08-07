@@ -38,4 +38,4 @@ gem 'rubyntlm', :git => 'git://github.com/wimm/rubyntlm.git'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'

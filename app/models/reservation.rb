@@ -1,5 +1,5 @@
 class Reservation < ActiveRecord::Base
-  attr_accessible :title, :cache_end_time, :cache_start_time, :exchange_event_id, :exchange_change_key, :package_id, :person_id, :questionnaire_response_id, :recurrence_id, :resource_id
+  attr_accessible :title, :cache_end_time, :cache_start_time, :exchange_event_id, :exchange_change_key, :package_id, :person_id, :questionnaire_response_id, :recurrence_id, :resource_id, :resource_attributes
   attr_writer :current_step
   
   # validates :person_id, :resource_id, :cache_start_time, :cache_end_time, :presence => true
@@ -8,6 +8,8 @@ class Reservation < ActiveRecord::Base
   belongs_to :resource
   belongs_to :person
   has_many :questions
+  accepts_nested_attributes_for :resource
+  
   
   def current_step
     @current_step || steps.first

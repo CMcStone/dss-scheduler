@@ -7,8 +7,8 @@ class Resource < ActiveRecord::Base
   belongs_to :resource_category
   has_one :resource_period
   has_many :questions
-  
-  validates :name, :description, :exchange_calendar_id, :presence => true
+  accepts_nested_attributes_for :questions
+
+  #validates :name, :description, :exchange_calendar_id, :presence => true
   validates_inclusion_of :allow_public, :in => [true, false]
-  accepts_nested_attributes_for :questions  
 end

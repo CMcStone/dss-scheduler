@@ -1,17 +1,10 @@
-
 class ReservationsController < ApplicationController
+
+  before_filter :init_wizard_session, :only => [:index, :wizard]
+
   # GET /reservations
   # GET /reservations.json
   def index
-    @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
-    @reservations = @person.reservations
-    session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
-    @reservation = Reservation.new(session[:reservation_params])
-    @reservation.current_step = session[:reservation_step]
-    @resource_categories = ResourceCategory.all
-    @resources = Resource.all
-    @departments = Resource.select("DISTINCT(ou_uid), description")
-    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @reservations }
@@ -32,7 +25,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   # GET /reservations/new.json
   def new
-    @reservation = Reservation.new#(session[:reservation_params])
+    @reservation = Reservation.new
   end
 
   # GET /reservations/1/edit
@@ -86,33 +79,52 @@ class ReservationsController < ApplicationController
     end
   end
   
-  def wizard
+  def init_wizard_session
     #debugger
+    #session[:reservation_step] = session[:reservation_params] = nil
+
     session[:reservation_params] ||= {}
-    session[:resource_params] ||= {}
     session[:reservation_params].deep_merge!(params[:reservation]) if params[:reservation]
-    session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
     @reservation = Reservation.new(session[:reservation_params])
+    session[:resource_params] ||= {}
+    session[:resource_params].deep_merge!(params[:resource]) if params[:resource]
+    session[:question_response_params] ||= {}
+    session[:question_response_params].deep_merge!(params[:question_response]) if params[:question_response]
+    
     @reservation.current_step = session[:reservation_step]
     @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
     @reservations = @person.reservations
     @resource_categories = ResourceCategory.all
-    @resources = Resource.all
     @departments = Resource.select("DISTINCT(ou_uid), description")
 
-    if @reservation.valid?
-        if params[:back_button]
-          @reservation.previous_step
-        elsif @reservation.last_step?
-          @reservation.save if @reservation.all_valid?
-        else
-          @reservation.next_step
-        end
-        session[:reservation_step] = @reservation.current_step
+    #debugger
+    @resource = @reservation.resource
+    @resource_category = @resource.resource_category if @resource
+    @resources = @resource_category.resources if @resource_category
+    @questions = @resource.questions if @resource
+    @questions.each do |q|
+        response = q.question_responses.build
+    end if (@questions && !response)
+  end
+  
+  def wizard
+    #debugger
+    
+    if params[:back_button]
+      @reservation.previous_step
+      session[:reservation_step] = @reservation.current_step
+    elsif true
+      if @reservation.last_step?
+        @reservation.save if @reservation.all_valid?
+      else
+        @reservation.next_step
+      end
+      session[:reservation_step] = @reservation.current_step
     end
     if @reservation.new_record?
       respond_to do |format|
         format.js
+        format.json { head :no_content }
       end
     else
       session[:reservation_step] = session[:reservation_params] = nil

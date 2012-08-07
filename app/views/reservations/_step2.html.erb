@@ -17,13 +17,13 @@
       <div class="controls">
 		<select id="resource_id" name="reservation[resource_id]">
 			<option value class="static">Select Resource</option>
-	        <% Resource.where('category_id = ' + session[:resource_params]['category_id']).each do |r|	%>
+	        <% Resource.where('resource_category_id = ' + session[:resource_params]['resource_category_id']).each do |r|	%>
 				<option value="<%= r.id %>"
 					class="dep_<%= r.ou_uid %>"
 					<% if session[:reservation_params]['resource_id'].to_i == r.id %>
 						selected
 					<% end %>
-					>
+				>
 					<%= r.name %>
 				</option>
 			<% end %>
