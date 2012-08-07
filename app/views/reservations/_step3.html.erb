@@ -6,26 +6,20 @@
 </p>
 
 <%= form_for(@reservation, :remote=>true, :url => reservations_wizard_path) do |f| %>
-  <fieldset>
-	<div class="control-group">
-      <label class="control-label" for="input01">Custom Question:</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge" id="input01">
-      </div>
-    </div>
-	<div class="control-group">
-      <label class="control-label" for="input01">Custom Question:</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge" id="input01">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="input01">Custom Question:</label>
-      <div class="controls">
-        <%=	collection_select("name", "resource_id", @reservations, :id, :title )	%> <!-- TODO: change to correct Department list -->
-      </div>
-    </div>
-  </fieldset>
+	<%= f.fields_for :resource do |r|%>
+		<%= r.fields_for :questions do |q|%>
+		<fieldset>
+			<div class="control-group">
+				<%= q.label :question, q.object.question %>
+		     	<div class="controls">
+					<%= q.fields_for :question_responses do |qr|%>
+						<%= qr.text_field :value, class: 'input-xlarge' %><br />
+					<% end %>
+		     	</div>
+		   </div>
+		</fieldset>
+		<% end %>
+	<% end %>
   <p><%= f.submit "Continue", :name => "next_button" unless @reservation.first_step? %></p>
   <p><%= f.submit "Back", :name => "back_button" unless @reservation.first_step? %></p>
 <% end %>

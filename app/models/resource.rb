@@ -7,6 +7,6 @@ class Resource < ActiveRecord::Base
   has_many :questions
   accepts_nested_attributes_for :questions
 
-  validates :name, :description, :exchange_url, :week_field, :start_time, :end_time, :allow_public, :presence => true
+  #validates :name, :description, :exchange_url, :week_field, :start_time, :end_time, :allow_public, :presence => true
   
 end
