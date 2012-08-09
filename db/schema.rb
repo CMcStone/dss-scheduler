@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20120807210827) do
     t.datetime "updated_at",                :null => false
     t.string   "title"
     t.text     "description"
+    t.string   "exchange_change_key"
   end
 
   create_table "resource_availabilities", :force => true do |t|
