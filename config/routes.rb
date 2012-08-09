@@ -1,5 +1,7 @@
 DssScheduler::Application.routes.draw do
-  resources :resources
+  resources :resources do
+    resources :questions
+  end
   match '/reservations/wizard', :controller => 'reservations', :action => 'wizard'
   resources :reservations
   resources :resource_categories
