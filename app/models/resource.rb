@@ -1,6 +1,6 @@
 class Resource < ActiveRecord::Base
 
-  attr_accessible :name, :category_id, :description, :exchange_calendar_id, :ou_uid, :instructions, :role_required, :allow_public, :questions_attributes
+  attr_accessible :name, :resource_category_id, :description, :exchange_calendar_id, :ou_uid, :instructions, :role_required, :allow_public, :questions_attributes
 
   
   has_many :reservations
