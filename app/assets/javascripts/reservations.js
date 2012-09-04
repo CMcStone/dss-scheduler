@@ -5,9 +5,19 @@ $(document).ready(function() {
 	}).fade;
 	$('#wizard').on('shown', function () {
 		$('#calendar').fullCalendar('render');
-	})
+	});
 	$('a[data-method="delete"]').on('ajax:success', function(e, c, s, o) {
 		$(this).parent().parent().fadeOut();
+	});
+	$('input#btn_continue').click( function(e){
+		e.preventDefault();
+		$.ajax({
+			url: '/reservations', //get next step data
+			success: function() {
+				//update the html of wizard-form div
+				//and increment the step number in the session
+			}
+		});
 	});
 });
 
@@ -35,3 +45,20 @@ $(function(){
 
 	cascadeSelect(departmentSelect, resourceSelect);
 });
+
+function getResourceQuestions(resource) {
+	$.ajax({
+		url: '/resources/' + resource + '/questions.json',
+		success: function(questions) {
+			
+			//$('div#debug-area').html(result);
+			var tmpl = $('#tmpl-question').html();
+			//console.log(tmpl);
+			$('div#wizard-form').html('');
+			_.each(questions, function(question) {
+				var compiled = _.template(tmpl, {question: question});
+				$('div#wizard-form').append(compiled);
+			});
+		}
+	})
+}
