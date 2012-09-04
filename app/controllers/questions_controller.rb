@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
     @questions = @resource.questions
     
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @questions }
     end
   end
