@@ -1,3 +1,11 @@
+if (sessionStorage.getItem("currentstep") == null) {
+	var currentStep = 1;	
+} else {
+	var currentStep = sessionStorage.getItem("currentstep");
+}
+
+console.log(currentStep);
+
 $(document).ready(function() {
 	$('#wizard').modal({
 		keyboard: false,
@@ -11,13 +19,36 @@ $(document).ready(function() {
 	});
 	$('input#btn_continue').click( function(e){
 		e.preventDefault();
+		currentStep += 1;
+		sessionStorage.setItem("currentstep", currentStep);
 		$.ajax({
 			url: '/reservations', //get next step data
 			success: function() {
 				//update the html of wizard-form div
 				//and increment the step number in the session
+				console.log(currentStep);
 			}
 		});
+	});
+	$('input#btn_back').click( function(e){
+		e.preventDefault();
+		currentStep -= 1;
+		sessionStorage.setItem("currentstep", currentStep);
+		$.ajax({
+			url: '/reservations', //get next step data
+			success: function() {
+				//update the html of wizard-form div
+				//and increment the step number in the session
+				console.log(currentStep);
+			}
+		});
+	});
+	$('fieldset.dept-resource').ready( function(e){
+		cascadeForm = $('.new_reservation');
+		departmentSelect = cascadeForm.find('#resource_ou_uid');
+		resourceSelect = cascadeForm.find('#resource_id');
+
+		cascadeSelect(departmentSelect, resourceSelect);
 	});
 });
 
