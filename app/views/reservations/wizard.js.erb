@@ -1,3 +1,4 @@
+
 <% step = @reservation.current_step %>
 $('div#debug-area').html("<%= escape_javascript(debug session) %>");
 $('div#wizard-form').html("<%= escape_javascript(render :partial => step) %>");
@@ -32,5 +33,5 @@ if ( step == "step2" ) {
 	});
 }
 else if ( step == "step3" ){
-	//TODO: ajax call to get questions
+	getResourceQuestions(<%= @resource.id if @resource %>)
 }
