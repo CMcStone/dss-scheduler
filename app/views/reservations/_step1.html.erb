@@ -16,10 +16,8 @@
 <% end %>
 </table>
 <h1>What would you like to reserve?</h1>
-<%= form_for(@reservation, :remote=>true, :url => reservations_wizard_path) do |f| %>
-	<div class="btn-group wizard-btn-group">
-		<% @resource_categories.each do |rc| %>
-			<%= f.submit rc.id, :name => "resource[resource_category_id]", :class => "btn wizard-resource resource-" + rc.name %>
-		<% end %>
-	</div>
-<% end %>
+<div class="btn-group wizard-btn-group">
+	<% @resource_categories.each do |rc| %>
+		<%= f.submit rc.id, :name => "resource[resource_category_id]", :class => "btn wizard-resource resource-" + rc.name %>
+	<% end %>
+</div>

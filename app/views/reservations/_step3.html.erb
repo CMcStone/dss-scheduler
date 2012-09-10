@@ -20,6 +20,4 @@
 		</fieldset>
 		<% end %>
 	<% end %>
-  <p><%= f.submit "Continue", :name => "next_button" unless @reservation.first_step? %></p>
-  <p><%= f.submit "Back", :name => "back_button" unless @reservation.first_step? %></p>
 <% end %>
