@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
 
-  before_filter :init_wizard_session, :only => [:index, :wizard]
+  before_filter :init_wizard_session, :only => [:index, :wizard, :new]
 
   # GET /reservations
   # GET /reservations.json
@@ -26,6 +26,10 @@ class ReservationsController < ApplicationController
   # GET /reservations/new.json
   def new
     @reservation = Reservation.new
+    
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
   end
 
   # GET /reservations/1/edit
@@ -123,6 +127,7 @@ class ReservationsController < ApplicationController
     end
     if @reservation.new_record?
       respond_to do |format|
+        format.html # show.html.erb
         format.js
         format.json { head :no_content }
       end
@@ -131,7 +136,6 @@ class ReservationsController < ApplicationController
       flash[:notice] = "Reservation created!"
       redirect_to @reservation
     end
-    
-    #format.html { render :layout => false }
+
   end
 end
