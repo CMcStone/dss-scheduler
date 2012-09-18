@@ -1,8 +1,5 @@
-<a class="btn" data-toggle="modal" href="#wizard" >Launch Wizard</a>
-<div class="modal hide fade" id="wizard">
-	<button type="button" class="close" data-dismiss="modal">×</button>
-   	<div class="tab-pane active" id="tab1">
-      <%= render :file => 'reservations/wizard' %>
-    </div>
-</div>
-
+<%= button_to "Launch Wizard", new_reservation_path, remote: true, method: :get, :update => "wizard_bootstrapper" %>
+<div id="wizard_bootstrapper" />
+<script type="text/javascript">
+	$("form").on("ajax:complete", function(a, b) { $("div#wizard_bootstrapper").html(b.responseText); });
+</script>

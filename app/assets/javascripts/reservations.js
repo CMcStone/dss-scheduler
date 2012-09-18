@@ -1,56 +1,4 @@
-if (sessionStorage.getItem("currentstep") == null) {
-	var currentStep = 1;	
-} else {
-	var currentStep = sessionStorage.getItem("currentstep");
-}
 
-console.log(currentStep);
-
-$(document).ready(function() {
-	$('#wizard').modal({
-		keyboard: false,
-		show: true
-	}).fade;
-	$('#wizard').on('shown', function () {
-		$('#calendar').fullCalendar('render');
-	});
-	$('a[data-method="delete"]').on('ajax:success', function(e, c, s, o) {
-		$(this).parent().parent().fadeOut();
-	});
-	$('input#btn_continue').click( function(e){
-		e.preventDefault();
-		currentStep += 1;
-		sessionStorage.setItem("currentstep", currentStep);
-		$.ajax({
-			url: '/reservations', //get next step data
-			success: function() {
-				//update the html of wizard-form div
-				//and increment the step number in the session
-				console.log(currentStep);
-			}
-		});
-	});
-	$('input#btn_back').click( function(e){
-		e.preventDefault();
-		currentStep -= 1;
-		sessionStorage.setItem("currentstep", currentStep);
-		$.ajax({
-			url: '/reservations', //get next step data
-			success: function() {
-				//update the html of wizard-form div
-				//and increment the step number in the session
-				console.log(currentStep);
-			}
-		});
-	});
-	$('fieldset.dept-resource').ready( function(e){
-		cascadeForm = $('.new_reservation');
-		departmentSelect = cascadeForm.find('#resource_ou_uid');
-		resourceSelect = cascadeForm.find('#resource_id');
-
-		cascadeSelect(departmentSelect, resourceSelect);
-	});
-});
 
 
 // Source: http://jsatt.blogspot.com/2010/01/cascading-select-boxes-using-jquery.html
@@ -70,11 +18,11 @@ function cascadeSelect(parent, child){
 }
 
 $(function(){
-	cascadeForm = $('.new_reservation');
-	departmentSelect = cascadeForm.find('#resource_ou_uid');
-	resourceSelect = cascadeForm.find('#resource_id');
+	//cascadeForm = $('.new_reservation');
+	//departmentSelect = cascadeForm.find('#resource_ou_uid');
+	//resourceSelect = cascadeForm.find('#resource_id');
 
-	cascadeSelect(departmentSelect, resourceSelect);
+	//cascadeSelect(departmentSelect, resourceSelect);
 });
 
 function getResourceQuestions(resource) {
@@ -93,3 +41,56 @@ function getResourceQuestions(resource) {
 		}
 	})
 }
+
+
+
+(function (reservations, $, undefined) {
+	reservations.current_step = null;
+	reservations.reservations = null;
+
+	reservations.initialize = function() {
+		reservations.current_step = 1;
+		console.log('I just initialized!');
+		
+		$('#wizard').modal({
+			keyboard: false,
+			show: true
+		});
+		$('#wizard').on('shown', function () {
+			$('#calendar').fullCalendar('render');
+		});
+		$('a[data-method="delete"]').on('ajax:success', function(e, c, s, o) {
+			$(this).parent().parent().fadeOut();
+			console.log(e);
+		});
+		$('input#btn_continue').click( function(e){
+			e.preventDefault();
+			reservations.current_step++;
+			reservations.perform_step();
+		});
+		$('input#btn_back').click( function(e){
+			e.preventDefault();
+			reservations.current_step--;
+			reservations.perform_step();
+		});
+		$('fieldset.dept-resource').ready( function(e){
+			cascadeForm = $('.new_reservation');
+			departmentSelect = cascadeForm.find('#resource_ou_uid');
+			resourceSelect = cascadeForm.find('#resource_id');
+
+			cascadeSelect(departmentSelect, resourceSelect);
+		});
+		
+		reservations.perform_step();
+		
+	};
+	
+	reservations.perform_step = function() {
+		var tmpl = $("#templ-step" + reservations.current_step).html();
+		$('.modal').empty();
+		console.log(reservations);
+		var compiled = _.template(tmpl, {reservations: reservations.reservations, resource_categories: reservations.resource_categories});
+		$('.modal').html(compiled);
+	}
+
+} (window.reservations = window.reservations || {}, jQuery));
