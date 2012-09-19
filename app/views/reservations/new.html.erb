@@ -1,5 +1,50 @@
-<h1>New reservation</h1>
+<div class="modal hide fade" id="wizard">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+</div>
 
-<%= render 'form' %>
+<script id="templ-step1" type="text/template">
+  	<h1>Agenda</h1>
+	<div id="wizard-table">
+		<table class="table table-striped table-condensed wizard">
+		  <tr>
+		    <th>Resource</th>
+		    <th>Date</th>
+		    <th></th>
+		  </tr>
+	
+		  {{! resource_categories }}
 
-<%= link_to 'Back', reservations_path %>
+		  {{ _.each(reservations, function(reservation) { }}
+		  <tr id="reservation_{{= reservation.id }}">
+		    <td> {{= reservation.id }} </td>
+		    <td> {{= reservation.start }} </td>
+		    <td>
+				<a href="/reservations/{{= reservation.id }}" data-method="delete" data-remote="true" rel="nofollow">Cancel</a>
+			</td>
+		  </tr>
+		  {{ }) }}
+		</table>
+	</div>
+	<h1>What would you like to reserve?</h1>
+	<div class="btn-group wizard-btn-group">
+		{{ _.each(resource_categories, function(category) { }}
+			<input type="submit" name="resource[{{= category.id }}]" class="btn wizard-resource resource-{{= category.name }}" >
+		{{ }) }}
+	</div>
+</script>
+<script id="tmpl-step2" type="text/template">
+  	<p>{{= question.question }}</p><input type="text" />
+</script>
+<script id="tmpl-step3" type="text/template">
+  	<p>{{= question.question }}</p><input type="text" />
+</script>
+<script id="tmpl-step4" type="text/template">
+  	<p>{{= question.question }}</p><input type="text" />
+</script>
+
+<%= javascript_include_tag "reservations" %>
+<script type="text/javascript">
+	reservations.reservations = $.parseJSON('<%= @reservations.to_json.html_safe %>');
+	reservations.resource_categories = $.parseJSON('<%= @resource_categories.to_json.html_safe %>');
+	reservations.initialize();
+</script>

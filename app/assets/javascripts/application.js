@@ -15,5 +15,12 @@
 //= require      bootstrap
 //= require_tree ./fullcalendar
 //= require      jquery-ui-1.8.11.custom.min
-//= require      reservations
 //= require      resources
+//= require		 underscore
+
+
+// Let Underscore know we'll be using Mustache-style templates
+_.templateSettings = {
+    interpolate: /\{\{\=(.+?)\}\}/g,
+    evaluate: /\{\{(.+?)\}\}/g
+};

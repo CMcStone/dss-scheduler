@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
 
-  before_filter :init_wizard_session, :only => [:index, :wizard]
+  before_filter :init_wizard_session, :only => [:index, :wizard, :new]
 
   # GET /reservations
   # GET /reservations.json
@@ -26,6 +26,10 @@ class ReservationsController < ApplicationController
   # GET /reservations/new.json
   def new
     @reservation = Reservation.new
+    
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
   end
 
   # GET /reservations/1/edit
@@ -92,12 +96,12 @@ class ReservationsController < ApplicationController
     session[:question_response_params].deep_merge!(params[:question_response]) if params[:question_response]
     
     @reservation.current_step = session[:reservation_step]
-    @person = Person.find_by_uid(1) #TODO: Change the 0 to the current user UID after implementing the Roles Mgmt
+    @person = Person.find_by_uid(1) #TODO: Change the 1 to the current user UID after implementing the Roles Mgmt
     @reservations = @person.reservations
     @resource_categories = ResourceCategory.all
-    @departments = Resource.select("DISTINCT(ou_uid), description")
 
-    #debugger
+    # We can have a switch-case statement here to get the variables depending on the step #
+    @departments = Resource.select("DISTINCT(ou_uid), description") 
     @resource = @reservation.resource
     @resource_category = @resource.resource_category if @resource
     @resources = @resource_category.resources if @resource_category
@@ -113,7 +117,7 @@ class ReservationsController < ApplicationController
     if params[:back_button]
       @reservation.previous_step
       session[:reservation_step] = @reservation.current_step
-    elsif true
+    else
       if @reservation.last_step?
         @reservation.save if @reservation.all_valid?
       else
@@ -123,6 +127,7 @@ class ReservationsController < ApplicationController
     end
     if @reservation.new_record?
       respond_to do |format|
+        format.html # show.html.erb
         format.js
         format.json { head :no_content }
       end
@@ -131,5 +136,6 @@ class ReservationsController < ApplicationController
       flash[:notice] = "Reservation created!"
       redirect_to @reservation
     end
+
   end
 end
