@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807210827) do
+ActiveRecord::Schema.define(:version => 20120821221623) do
 
   create_table "people", :force => true do |t|
     t.datetime "created_at",  :null => false
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20120807210827) do
     t.boolean  "role_required"
     t.boolean  "allow_public"
     t.integer  "exchange_calendar_id"
+    t.string   "sync_state"
   end
 
   create_table "roles", :force => true do |t|
